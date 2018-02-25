@@ -1,2 +1,49 @@
 # typevalue
-Convert values to their proper type.
+Convert JavaScript values to their proper type.
+
+```javascript
+let typeValue = require('./dist/index');
+let exampleObject = {
+    'date': [
+        '1982-07-19 04:20:00-700',
+        '1982-07-19 04:20:00',
+        '1982-07-19'
+    ],
+    'boolean': [
+        'true',
+        'false',
+        'yes',
+        'no'
+    ],
+    'number': [
+        '0',
+        '1',
+        '0.1',
+        '1.0'
+    ]
+};
+console.log('typeExample', JSON.stringify(typeValue(exampleObject), null, 4));
+```
+
+Output:
+```
+typeExample {
+    "date": [
+        "1982-07-19T11:20:00.000Z",
+        "1982-07-19T11:20:00.000Z",
+        "1982-07-19T07:00:00.000Z"
+    ],
+    "boolean": [
+        true,
+        false,
+        true,
+        false
+    ],
+    "number": [
+        0,
+        1,
+        0.1,
+        1
+    ]
+}
+```

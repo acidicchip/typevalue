@@ -1,0 +1,36 @@
+{
+  "name": "typevalue",
+  "version": "0.0.1",
+  "description": "Convert values to their proper type.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "node dist/index",
+    "prepublishOnly": "npm run compile",
+    "compile": "npm run clean && tsc -p .",
+    "watch": "tsc -w -p .",
+    "clean": "rm -rf dist"
+  },
+  "keywords": [
+    "typevalue",
+    "type",
+    "object"
+  ],
+  "author": "Chance O. One",
+  "license": "MIT",
+  "bugs": {
+    "url": "http://github.com/acidicchip/typevalue/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/acidicchip/typevalue.git"
+  },
+  "devDependencies": {
+    "@types/node": "^9.4.6",
+    "@types/requirejs": "^2.1.31",
+    "typescript": "^2.7.2"
+  },
+  "dependencies": {
+    "moment": "^2.20.1"
+  }
+}
