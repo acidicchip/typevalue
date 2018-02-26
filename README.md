@@ -25,7 +25,10 @@ let exampleObject = {
         '0',
         '1',
         '0.1',
-        '1.0'
+        '1.0',
+        '1,000',
+        '1.5k',
+        '$1.25m'
     ]
 };
 console.log('typeExample', JSON.stringify(typeValue(exampleObject), null, 4));
@@ -37,7 +40,7 @@ typeExample {
     "date": [
         "1982-07-19T11:20:00.000Z",
         "1982-07-19T11:20:00.000Z",
-        "1982-07-19T07:00:00.000Z"
+        "1982-07-19T00:00:00.000Z"
     ],
     "boolean": [
         true,
@@ -49,7 +52,10 @@ typeExample {
         0,
         1,
         0.1,
-        1
+        1,
+        1000,
+        1500,
+        1250000
     ]
 }
 ```
