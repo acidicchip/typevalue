@@ -16,7 +16,10 @@
             '0',
             '1',
             '0.1',
-            '1.0'
+            '1.0',
+            '1,000',
+            '1.5k',
+            '$1.25m'
         ]
     };
     console.log('typeExample', JSON.stringify(typeValue(exampleObject), null, 4));

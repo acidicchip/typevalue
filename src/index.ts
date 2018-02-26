@@ -1,11 +1,11 @@
 (function (root, typeValue) {
-    if (typeof require === 'function' && typeof exports === 'object' && typeof module === 'object') {
+    if ((typeof(require) === 'function') && (typeof(exports) === 'object') && (typeof(module) === 'object')) { // Node.js support
         module.exports = typeValue();
-    } else if (typeof define === 'function' && define.amd) {
+    } else if ((typeof(define) === 'function') && define.amd) { // AMD support
         define(function () {
             return typeValue();
         });
-    } else {
+    } else { // Browser support
         root.typeValue = typeValue();
     }
 })(this, function () {
@@ -13,7 +13,7 @@
 
     let typeValue: any = function (obj: any) {
         if (Array.isArray(obj)) {
-            return obj.reduce((res:any, item) => {
+            return obj.reduce((res: any, item) => {
                 res.push(typeValue(item));
                 return res;
             }, []);
@@ -27,25 +27,37 @@
         let match;
         switch (typeof(obj)) {
             case 'string':
-                if (!obj.trim()) { // Empty Value
+                obj = obj.trim();
+                if (!obj) { // Empty Value
                     return undefined;
                 } else if (/^(true|yes|false|no)$/i.test(obj)) { // Boolean
                     return /^(true|yes)$/i.test(obj);
-                } else if (isFinite(obj)) { // Number
+                } else if (
+                    isFinite(obj)
+                    || (
+                        /^[0-9.,]+$/.test(obj)
+                        && (match = obj.match(/([0-9.])/g))
+                        && (isFinite(match.join('')))
+                    )
+                ) { // Number
+                    if (match) {
+                        // console.log('match', match);
+                        return Number(match.join(''));
+                    }
+
                     return Number(obj);
-                } else if (match = String(obj).match(/^\$([0-9.]+)(\w)?$/)) { // Abbreviated Dollars
-                    return Number(match[1]) * (({
+                } else if (match = obj.match(/^\$?([0-9.,]+)([kmbt])?$/i)) { // Abbreviated Dollars
+                    return Number(typeValue(match[1])) * (({
                         'k': 1000,
                         'm': 1000000,
                         'b': 1000000000,
                         't': 1000000000000
                     } as any)[(match[2] || '').toLowerCase()] || 1);
                 } else if (
-                    (obj.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2}(?:[T ][0-9:+-]+)?$/)) // @TODO - Cleanup
-                    // && (moment(obj).isValid())
+                    (match = obj.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2}(?:[T ][0-9:+-]+)?$/)) // @TODO - Cleanup
                     && (moment(new Date(obj)).isValid())
                 ) { // Date
-                    return moment(obj).toDate();
+                    return moment(new Date(obj)).toDate();
                 }
 
                 return obj;

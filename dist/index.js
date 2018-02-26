@@ -1,9 +1,9 @@
 "use strict";
 (function (root, typeValue) {
-    if (typeof require === 'function' && typeof exports === 'object' && typeof module === 'object') {
+    if ((typeof (require) === 'function') && (typeof (exports) === 'object') && (typeof (module) === 'object')) {
         module.exports = typeValue();
     }
-    else if (typeof define === 'function' && define.amd) {
+    else if ((typeof (define) === 'function') && define.amd) {
         define(function () {
             return typeValue();
         });
@@ -29,27 +29,34 @@
         var match;
         switch (typeof (obj)) {
             case 'string':
-                if (!obj.trim()) {
+                obj = obj.trim();
+                if (!obj) {
                     return undefined;
                 }
                 else if (/^(true|yes|false|no)$/i.test(obj)) {
                     return /^(true|yes)$/i.test(obj);
                 }
-                else if (isFinite(obj)) {
+                else if (isFinite(obj)
+                    || (/^[0-9.,]+$/.test(obj)
+                        && (match = obj.match(/([0-9.])/g))
+                        && (isFinite(match.join(''))))) {
+                    if (match) {
+                        // console.log('match', match);
+                        return Number(match.join(''));
+                    }
                     return Number(obj);
                 }
-                else if (match = String(obj).match(/^\$([0-9.]+)(\w)?$/)) {
-                    return Number(match[1]) * ({
+                else if (match = obj.match(/^\$?([0-9.,]+)([kmbt])?$/i)) {
+                    return Number(typeValue(match[1])) * ({
                         'k': 1000,
                         'm': 1000000,
                         'b': 1000000000,
                         't': 1000000000000
                     }[(match[2] || '').toLowerCase()] || 1);
                 }
-                else if ((obj.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2}(?:[T ][0-9:+-]+)?$/)) // @TODO - Cleanup
-                    // && (moment(obj).isValid())
+                else if ((match = obj.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2}(?:[T ][0-9:+-]+)?$/)) // @TODO - Cleanup
                     && (moment(new Date(obj)).isValid())) {
-                    return moment(obj).toDate();
+                    return moment(new Date(obj)).toDate();
                 }
                 return obj;
             default:
