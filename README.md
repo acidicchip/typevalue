@@ -1,6 +1,12 @@
 # typevalue
-Convert JavaScript values to their proper type.
+Convert JavaScript values to their proper type. Handy for converting strings into their properly typed value.
 
+## Installation
+```bash
+npm i typevalue
+```
+
+## Usage
 ```javascript
 let typeValue = require('./dist/index');
 let exampleObject = {
