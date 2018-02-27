@@ -3,12 +3,12 @@ Convert JavaScript values to their proper type. Handy for converting strings int
 
 ## Installation
 ```bash
-npm i typevalue
+npm i --save typevalue
 ```
 
 ## Usage
 ```javascript
-let typeValue = require('./dist/index');
+let typeValue = require('typevalue');
 let exampleObject = {
     'date': [
         '1982-07-19 04:20:00-700',
