@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "node dist/index",
+    "test": "mocha --reporter spec",
     "xprepublishOnly": "npm run compile",
     "compile": "npm run clean && tsc -p .",
     "watch": "tsc -w -p .",
@@ -28,8 +28,13 @@
   },
   "homepage": "https://github.com/acidicchip/typevalue#readme",
   "devDependencies": {
+    "@types/chai": "^4.1.2",
+    "@types/mocha": "^2.2.48",
     "@types/node": "^9.4.6",
     "@types/requirejs": "^2.1.31",
+    "chai": "^4.1.2",
+    "chalk": "^2.3.2",
+    "mocha": "^5.0.4",
     "typescript": "^2.7.2"
   },
   "dependencies": {
