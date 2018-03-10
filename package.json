@@ -1,6 +1,6 @@
 {
   "name": "typevalue",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Convert JavaScript values to their proper type. Handy for converting strings into their properly typed value.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
