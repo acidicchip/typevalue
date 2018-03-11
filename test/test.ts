@@ -55,8 +55,20 @@ describe('typeValue(val) Tests', () => {
         what: '1.5k',
         value: 1500
     }, {
+        what: '1,250.5k',
+        value: 1250500
+    }, {
         what: '$1.25m',
         value: 1250000
+    }, {
+        what: '$1,000.25k',
+        value: 1000250
+    }, {
+        what: '123.123.1234',
+        value: '123.123.1234'
+    }, {
+        what: '123-123-1234',
+        value: '123-123-1234'
     }].forEach((test) => {
         it(chalk.cyan((typeof(test.what) === 'string') ? `"${test.what}"` : String(test.what)) + ' should return ' + chalk.green(String(test.value)), () => {
             expect(typeValue(test.what)).to.equal(test.value);
