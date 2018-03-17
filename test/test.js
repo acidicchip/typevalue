@@ -65,7 +65,7 @@ describe('typeValue(val) Tests', function () {
             what: '123-123-1234',
             value: '123-123-1234'
         }].forEach(function (test) {
-        it(chalk.cyan((typeof (test.what) === 'string') ? "\"" + test.what + "\"" : String(test.what)) + ' should return ' + chalk.green(String(test.value)), function () {
+        it(chalk.cyan((typeof (test.what) === 'string') ? "\"" + test.what + "\"" : String(test.what)) + ' should return ' + chalk.green((typeof (test.value) === 'string') ? "\"" + test.value + "\"" : String(test.value)), function () {
             expect(typeValue(test.what)).to.equal(test.value);
         });
     });
@@ -88,7 +88,7 @@ describe('typeValue(val) Tests', function () {
             what: '2018-03-13',
             value: new Date('2018-03-13')
         }].forEach(function (test) {
-        it(chalk.cyan((typeof (test.what) === 'string') ? "\"" + test.what + "\"" : String(test.what)) + ' should return ' + chalk.green(String(test.value)), function () {
+        it(chalk.cyan((typeof (test.what) === 'string') ? "\"" + test.what + "\"" : String(test.what)) + ' should return ' + chalk.green((typeof (test.value) === 'string') ? "\"" + test.value + "\"" : String(test.value)), function () {
             expect(typeValue(test.what).getTime()).to.equals(test.value.getTime());
         });
     });
